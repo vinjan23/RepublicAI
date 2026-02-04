@@ -67,7 +67,7 @@ chains:
       alert_if_inactive: yes
       alert_if_no_servers: yes
     nodes:
-      - url: https://rpc-republic.onenov.xyz
+      - url: https://rpc
         alert_if_down: yes
       - url: http://localhost:YOUR_RPC_PORT
         alert_if_down: yes
@@ -228,4 +228,5 @@ If your validator shows as INACTIVE but you know it's active, double-check that 
 - Tenderduty GitHub: https://github.com/blockpane/tenderduty
 - RepublicAI Discord: https://discord.com/invite/therepublic
 - RepublicAI GitHub: https://github.com/RepublicAI/networks
+
 
