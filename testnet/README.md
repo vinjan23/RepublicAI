@@ -39,13 +39,13 @@ State sync allows you to quickly sync from a recent snapshot instead of syncing 
 
 ```bash
 # 1. Install republicd binary
-VERSION="v0.1.0"
-curl -L "https://media.githubusercontent.com/media/RepublicAI/networks/main/testnet/releases/${VERSION}/republicd-linux-amd64" -o /tmp/republicd
+VERSION="v0.3.0"
+curl -L "https://github.com/RepublicAI/networks/releases/download/${VERSION}/republicd-linux-amd64" -o /tmp/republicd
 chmod +x /tmp/republicd
 sudo mv /tmp/republicd /usr/local/bin/republicd
 
 # 2. Initialize node
-REPUBLIC_HOME="$HOME/.republicd"
+REPUBLIC_HOME="$HOME/.republic"
 republicd init <your-moniker> --chain-id raitestnet_77701-1 --home "$REPUBLIC_HOME"
 
 # 3. Download genesis
@@ -74,13 +74,13 @@ republicd start --home "$REPUBLIC_HOME" --chain-id raitestnet_77701-1
 
 ```bash
 # 1. Install republicd binary
-VERSION="v0.1.0"
-curl -L "https://media.githubusercontent.com/media/RepublicAI/networks/main/testnet/releases/${VERSION}/republicd-linux-amd64" -o /tmp/republicd
+VERSION="v0.3.0"
+curl -L "https://github.com/RepublicAI/networks/releases/download/${VERSION}/republicd-linux-amd64" -o /tmp/republicd
 chmod +x /tmp/republicd
 sudo mv /tmp/republicd /usr/local/bin/republicd
 
 # 2. Initialize node
-REPUBLIC_HOME="$HOME/.republicd"
+REPUBLIC_HOME="$HOME/.republic"
 republicd init <your-moniker> --chain-id raitestnet_77701-1 --home "$REPUBLIC_HOME"
 
 # 3. Download genesis
@@ -99,21 +99,21 @@ republicd start --home "$REPUBLIC_HOME" --chain-id raitestnet_77701-1
 Pull the published image:
 
 ```bash
-docker pull ghcr.io/republicai/republicd:0.1.0
+docker pull ghcr.io/republicai/republicd:v0.3.0
 ```
 
 Initialize data and fetch genesis:
 
 ```bash
-REPUBLIC_HOME="$HOME/.republicd"
+REPUBLIC_HOME="$HOME/.republic"
 mkdir -p "$REPUBLIC_HOME"
 
 # Initialize (runs as root to create files)
 docker run --rm \
   --user 0:0 \
-  -v "$REPUBLIC_HOME:/home/republic/.republicd" \
-  ghcr.io/republicai/republicd:0.1.0 \
-  init my-node --chain-id raitestnet_77701-1 --home /home/republic/.republicd
+  -v "$REPUBLIC_HOME:/home/republic/.republic" \
+  ghcr.io/republicai/republicd:v0.3.0 \
+  init my-node --chain-id raitestnet_77701-1 --home /home/republic/.republic
 
 # Download genesis
 sudo curl -s https://raw.githubusercontent.com/RepublicAI/networks/main/testnet/genesis.json -o "$REPUBLIC_HOME/config/genesis.json"
@@ -144,9 +144,9 @@ Run the node:
 ```bash
 docker run -d --name republicd \
   --network host \
-  -v "$REPUBLIC_HOME:/home/republic/.republicd" \
-  ghcr.io/republicai/republicd:0.1.0 \
-  start --home /home/republic/.republicd --chain-id raitestnet_77701-1
+  -v "$REPUBLIC_HOME:/home/republic/.republic" \
+  ghcr.io/republicai/republicd:v0.3.0 \
+  start --home /home/republic/.republic --chain-id raitestnet_77701-1
 ```
 
 > **Note**: `--network host` is required for proper P2P connectivity and state sync. Ports 26656, 26657, 1317, 9090, 8545, 8546 will be exposed on the host.
@@ -221,7 +221,7 @@ After=network-online.target
 [Service]
 User=ubuntu
 WorkingDirectory=/home/ubuntu
-ExecStart=/usr/local/bin/republicd start --home /home/ubuntu/.republicd --chain-id raitestnet_77701-1
+ExecStart=/usr/local/bin/republicd start --home /home/ubuntu/.republic --chain-id raitestnet_77701-1
 Restart=always
 RestartSec=3
 LimitNOFILE=65535
