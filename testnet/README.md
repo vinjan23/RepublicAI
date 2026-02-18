@@ -244,4 +244,4 @@ sudo systemctl start republicd
 ## Support
 
 - GitHub Issues: https://github.com/RepublicAI/networks/issues
-- Discord: https://discord.com/invite/therepublic
+- Discord: https://discord.com/invite/republicai
